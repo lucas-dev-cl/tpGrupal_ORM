@@ -11,6 +11,24 @@ import java.util.List;
 
 @Entity
 @Table(name = "factura_venta")
+@NamedQueries({
+    @NamedQuery(
+        name = "FacturaVenta.findByUsuarioCarga",
+        query = "SELECT f FROM FacturaVenta f WHERE f.usuarioCarga.usuario = :nombreUsuario"
+    ),
+    @NamedQuery(
+        name = "FacturaVenta.findByMarcaArticulo",
+        query = "SELECT DISTINCT f FROM FacturaVenta f JOIN f.detalles d JOIN d.listaPrecioArticulo lpa JOIN lpa.articulo a JOIN a.marca m WHERE m.id = :marcaId"
+    ),
+    @NamedQuery(
+        name = "FacturaVenta.findByImporteMayorAlPromedio",
+        query = "SELECT f FROM FacturaVenta f WHERE f.importeTotal > (SELECT AVG(f2.importeTotal) FROM FacturaVenta f2)"
+    ),
+    @NamedQuery(
+        name = "FacturaVenta.findByClienteCuitCuil",
+        query = "SELECT f FROM FacturaVenta f WHERE f.cliente.cuitCuil = :cuitCuil"
+    )
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,6 +43,10 @@ public class FacturaVenta extends AuditoriaApp {
     @ManyToOne
     @JoinColumn(name = "punto_venta_id", nullable = false)
     private PuntoVenta puntoVenta;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private org.utn.entity.cliente.Cliente cliente;
 
     private double importeCobrado;
     private double importeSaldo;

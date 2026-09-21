@@ -9,6 +9,10 @@ import org.utn.entity.articulo.ListaPrecioArticulo;
 
 @Entity
 @Table(name = "factura_venta_detalle")
+@NamedQuery(
+    name = "FacturaVentaDetalle.findByPuntoVenta",
+    query = "SELECT d FROM FacturaVentaDetalle d INNER JOIN d.factura f INNER JOIN f.puntoVenta p WHERE p.id = :puntoVentaId"
+)
 @Getter
 @Setter
 @NoArgsConstructor
