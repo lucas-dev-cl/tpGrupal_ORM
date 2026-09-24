@@ -26,4 +26,8 @@ public class Cliente extends AuditoriaApp {
     @OneToOne
     @JoinColumn(name = "domicilio_id", nullable = false)
     private Domicilio domicilio;
+
+    @ManyToOne
+    @JoinColumn(name = "condicion_iva_id", nullable = false)
+    private CondicionIva condicionIva;
 }
