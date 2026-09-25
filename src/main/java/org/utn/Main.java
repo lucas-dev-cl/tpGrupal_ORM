@@ -1,5 +1,18 @@
 package org.utn;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import org.utn.entity.articulo.*;
+import org.utn.entity.usuario.Usuario;
+import org.utn.entity.venta.FacturaVenta;
+import org.utn.entity.venta.FacturaVentaDetalle;
+import org.utn.entity.venta.PuntoVenta;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("==================================================");
