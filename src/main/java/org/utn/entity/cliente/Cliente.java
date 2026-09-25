@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.utn.entity.base.AuditoriaApp;
-import org.utn.entity.venta.TipoMoneda;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "cliente", schema = "clientes")
 @Getter
 @Setter
 @NoArgsConstructor

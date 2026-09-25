@@ -6,30 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.utn.entity.base.AuditoriaApp;
 import org.utn.entity.cliente.Cliente;
+import org.utn.entity.usuario.Usuario;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "factura_venta")
-@NamedQueries({
-    @NamedQuery(
-        name = "FacturaVenta.findByUsuarioCarga",
-        query = "SELECT f FROM FacturaVenta f WHERE f.usuarioCarga.usuario = :nombreUsuario"
-    ),
-    @NamedQuery(
-        name = "FacturaVenta.findByMarcaArticulo",
-        query = "SELECT DISTINCT f FROM FacturaVenta f JOIN f.detalles d JOIN d.listaPrecioArticulo lpa JOIN lpa.articulo a JOIN a.marca m WHERE m.id = :marcaId"
-    ),
-    @NamedQuery(
-        name = "FacturaVenta.findByImporteMayorAlPromedio",
-        query = "SELECT f FROM FacturaVenta f WHERE f.importeTotal > (SELECT AVG(f2.importeTotal) FROM FacturaVenta f2)"
-    ),
-    @NamedQuery(
-        name = "FacturaVenta.findByClienteCuitCuil",
-        query = "SELECT f FROM FacturaVenta f WHERE f.cliente.cuitCuil = :cuitCuil"
-    )
-})
+@Table(name = "factura_venta", schema = "ventas")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -70,6 +53,10 @@ public class FacturaVenta extends AuditoriaApp {
     private Date fechaAnulacion;
 
     private String observaciones;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_carga_id")
+    private Usuario usuarioCarga;
 
     @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FacturaVentaDetalle> detalles;

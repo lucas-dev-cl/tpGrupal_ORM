@@ -1,4 +1,4 @@
-package org.utn.entity.articulo;
+package org.utn.entity.catalogo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.utn.entity.base.AuditoriaApp;
 
 @Entity
-@Table(name = "rubro")
+@Table(name = "rubro", schema = "catalogo")
 @Getter
 @Setter
 @NoArgsConstructor

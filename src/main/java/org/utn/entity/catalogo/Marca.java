@@ -1,4 +1,4 @@
-package org.utn.entity.articulo;
+package org.utn.entity.catalogo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,15 +9,15 @@ import lombok.Setter;
 import org.utn.entity.base.AuditoriaApp;
 
 @Entity
-@Table(name = "lista_precio")
+@Table(name = "marca", schema = "catalogo")
 @Getter
 @Setter
 @NoArgsConstructor
-public class ListaPrecio extends AuditoriaApp {
-
-    @Column(nullable = false)
-    private String codigo;
+public class Marca extends AuditoriaApp {
 
     @Column(nullable = false)
     private String denominacion;
+
+    @Column(nullable = false)
+    private Integer codigo;
 }

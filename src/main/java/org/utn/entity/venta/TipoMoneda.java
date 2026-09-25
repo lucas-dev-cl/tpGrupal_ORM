@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.utn.entity.base.AuditoriaApp;
 
 @Entity
-@Table(name = "tipo_moneda")
+@Table(name = "tipo_moneda", schema = "ventas")
 @Getter
 @Setter
 @NoArgsConstructor

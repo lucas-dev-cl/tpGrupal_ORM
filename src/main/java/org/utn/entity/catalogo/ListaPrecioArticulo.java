@@ -1,4 +1,4 @@
-package org.utn.entity.articulo;
+package org.utn.entity.catalogo;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.utn.entity.base.AuditoriaApp;
 
 @Entity
-@Table(name = "lista_precio_articulo")
+@Table(name = "lista_precio_articulo", schema = "catalogo")
 @Getter
 @Setter
 @NoArgsConstructor

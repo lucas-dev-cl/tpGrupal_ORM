@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.utn.entity.base.EntityId;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario", schema = "admin")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.utn.entity.base.EntityId;
 
 @Entity
-@Table(name = "contacto")
+@Table(name = "contacto", schema = "clientes")
 @Getter
 @Setter
 @NoArgsConstructor

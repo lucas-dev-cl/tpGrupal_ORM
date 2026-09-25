@@ -5,14 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.utn.entity.base.EntityId;
-import org.utn.entity.articulo.ListaPrecioArticulo;
+import org.utn.entity.catalogo.ListaPrecioArticulo;
 
 @Entity
-@Table(name = "factura_venta_detalle")
-@NamedQuery(
-    name = "FacturaVentaDetalle.findByPuntoVenta",
-    query = "SELECT d FROM FacturaVentaDetalle d INNER JOIN d.factura f INNER JOIN f.puntoVenta p WHERE p.id = :puntoVentaId"
-)
+@Table(name = "factura_venta_detalle", schema = "ventas")
 @Getter
 @Setter
 @NoArgsConstructor
