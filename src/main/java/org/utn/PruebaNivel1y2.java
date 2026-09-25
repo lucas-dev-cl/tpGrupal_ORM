@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.utn.consultas.ConsultasNivel1y2;
 import org.utn.entity.venta.FacturaVenta;
+import org.utn.entity.articulo.Articulo;
 
 import java.util.List;
 
@@ -35,6 +36,31 @@ public class PruebaNivel1y2 {
                 System.out.println("N° Factura: " + numero + 
                                    " | Fecha: " + fecha + 
                                    " | Importe Total: $" + total);
+            }
+            System.out.println("--- Punto 3: Artículos por Rubro ('Electrónica') ---");
+            List<Articulo> articulos = ConsultasNivel1y2.articulosPorRubro(em, "Electrónica");
+            
+            for (Articulo a : articulos) {
+                System.out.println("Código: " + a.getCodigo() + 
+                                   " | Denominación: " + a.getDenominacion() + 
+                                   " | Rubro: " + a.getRubro().getDenominacion());
+            }
+            System.out.println("--- Punto 4: Facturas entre rango de fechas ---");
+            // Definimos un rango amplio (ejemplo: todo el año actual) para que capture las facturas de prueba
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            
+            cal.set(2025, java.util.Calendar.JANUARY, 1, 0, 0, 0);
+            java.util.Date desde = cal.getTime();
+            
+            cal.set(2027, java.util.Calendar.DECEMBER, 31, 23, 59, 59);
+            java.util.Date hasta = cal.getTime();
+
+            List<FacturaVenta> facturasRango = ConsultasNivel1y2.facturasEntreFechas(em, desde, hasta);
+            
+            for (FacturaVenta f : facturasRango) {
+                System.out.println("Factura N°: " + f.getNumero() + 
+                                   " | Fecha: " + f.getFechaEmision() + 
+                                   " | Total: $" + f.getImporteTotal());
             }
         } finally {
             em.close();
