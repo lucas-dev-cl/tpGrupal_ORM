@@ -48,4 +48,19 @@ public class ConsultasNivel1y2 {
                  .setParameter("fechaHasta", fechaHasta)
                  .getResultList();
     }
+    /**
+     * 5. Condicionales Complejos y Verificación de Nulos (AND, OR, IS NULL).
+     * Facturas en estado "EMITIDA", con importeTotal > $10,000 y no anuladas.
+     */
+    public static List<FacturaVenta> facturasEmitidasMayoresANoAnuladas(EntityManager em, double montoMinimo) {
+        String jpql = "SELECT f FROM FacturaVenta f " +
+                      "WHERE f.estado = :estado " +
+                      "  AND f.importeTotal > :montoMinimo " +
+                      "  AND f.fechaAnulacion IS NULL";
+        
+        return em.createQuery(jpql, FacturaVenta.class)
+                 .setParameter("estado", "EMITIDA")
+                 .setParameter("montoMinimo", montoMinimo)
+                 .getResultList();
+    }
 }

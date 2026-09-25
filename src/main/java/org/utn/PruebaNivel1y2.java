@@ -62,6 +62,15 @@ public class PruebaNivel1y2 {
                                    " | Fecha: " + f.getFechaEmision() + 
                                    " | Total: $" + f.getImporteTotal());
             }
+            System.out.println("--- Punto 5: Facturas EMITIDAS > $10.000 y NO anuladas ---");
+            List<FacturaVenta> facturasFiltradas = ConsultasNivel1y2.facturasEmitidasMayoresANoAnuladas(em, 10000.0);
+            
+            for (FacturaVenta f : facturasFiltradas) {
+                System.out.println("N° Factura: " + f.getNumero() + 
+                                   " | Estado: " + f.getEstado() + 
+                                   " | Total: $" + f.getImporteTotal() + 
+                                   " | Fecha Anulación: " + f.getFechaAnulacion());
+            }
         } finally {
             em.close();
             emf.close();
