@@ -1,14 +1,14 @@
-package org.utn;
+package org.utn.Pruebas;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.utn.consultas.ConsultasNivel4y5;
-import org.utn.entity.articulo.Articulo;
-import org.utn.entity.articulo.ListaPrecio;
-import org.utn.entity.articulo.ListaPrecioArticulo;
-import org.utn.entity.articulo.Marca;
-import org.utn.entity.articulo.Rubro;
+import org.utn.entity.catalogo.Articulo;
+import org.utn.entity.catalogo.ListaPrecio;
+import org.utn.entity.catalogo.ListaPrecioArticulo;
+import org.utn.entity.catalogo.Marca;
+import org.utn.entity.catalogo.Rubro;
 import org.utn.entity.base.AuditoriaApp;
 import org.utn.entity.cliente.Cliente;
 import org.utn.entity.cliente.CondicionIva;
@@ -25,7 +25,11 @@ import java.util.List;
 
 public class PruebaNivel4y5 {
 
-    public static void main(String[] args) {
+    public static void ejecutar() {
+        System.out.println("\n==================================================");
+        System.out.println(">>> EJECUTANDO NIVELES 4 Y 5 (Consultas 16 a 22)");
+        System.out.println("==================================================");
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacturacionPU");
         EntityManager em = emf.createEntityManager();
         try {

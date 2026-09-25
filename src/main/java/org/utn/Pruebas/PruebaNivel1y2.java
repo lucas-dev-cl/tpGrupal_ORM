@@ -1,11 +1,11 @@
-package org.utn;
+package org.utn.Pruebas;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.utn.consultas.ConsultasNivel1y2;
 import org.utn.entity.venta.FacturaVenta;
-import org.utn.entity.articulo.Articulo;
+import org.utn.entity.catalogo.Articulo;
 import org.utn.entity.cliente.Cliente;
 import org.utn.entity.venta.PuntoVenta;
 import java.util.Arrays;
@@ -14,7 +14,11 @@ import java.util.List;
 
 public class PruebaNivel1y2 {
 
-    public static void main(String[] args) {
+    public static void ejecutar() {
+        System.out.println("\n==================================================");
+        System.out.println(">>> EJECUTANDO NIVELES 1 Y 2 (Consultas 1 a 9)");
+        System.out.println("==================================================");
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacturacionPU");
         EntityManager em = emf.createEntityManager();
 

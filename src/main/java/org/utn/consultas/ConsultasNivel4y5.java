@@ -1,8 +1,8 @@
 package org.utn.consultas;
 
 import jakarta.persistence.EntityManager;
-import org.utn.entity.articulo.Articulo;
-import org.utn.entity.articulo.Marca;
+import org.utn.entity.catalogo.Articulo;
+import org.utn.entity.catalogo.Marca;
 
 import java.util.List;
 

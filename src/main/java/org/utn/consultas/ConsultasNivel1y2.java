@@ -2,10 +2,9 @@ package org.utn.consultas;
 
 import jakarta.persistence.EntityManager;
 import org.utn.entity.venta.FacturaVenta;
-import org.utn.entity.articulo.Articulo;
+import org.utn.entity.catalogo.Articulo;
 import org.utn.entity.cliente.Cliente;
 import org.utn.entity.venta.PuntoVenta;
-import java.util.Arrays;
 
 import java.util.List;
 
