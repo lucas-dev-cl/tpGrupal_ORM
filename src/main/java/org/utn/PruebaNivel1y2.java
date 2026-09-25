@@ -6,6 +6,9 @@ import jakarta.persistence.Persistence;
 import org.utn.consultas.ConsultasNivel1y2;
 import org.utn.entity.venta.FacturaVenta;
 import org.utn.entity.articulo.Articulo;
+import org.utn.entity.cliente.Cliente;
+import org.utn.entity.venta.PuntoVenta;
+import java.util.Arrays;
 
 import java.util.List;
 
@@ -70,6 +73,35 @@ public class PruebaNivel1y2 {
                                    " | Estado: " + f.getEstado() + 
                                    " | Total: $" + f.getImporteTotal() + 
                                    " | Fecha Anulación: " + f.getFechaAnulacion());
+            }
+            System.out.println("--- Punto 6: Clientes por texto parcial ('juan') o CUIT ('20-') ---");
+            List<Cliente> clientes = ConsultasNivel1y2.buscarClientesPorNombreOCuit(em, "juan", "20-");
+            
+            for (Cliente c : clientes) {
+                System.out.println("Denominación: " + c.getDenominacion() + 
+                                   " | CUIT/CUIL: " + c.getCuitCuil());
+            }
+            System.out.println("--- Punto 7: Estados únicos de facturas ---");
+            List<String> estados = ConsultasNivel1y2.estadosUnicosFacturas(em);
+            for (String est : estados) {
+                System.out.println("Estado: " + est);
+            }
+
+            System.out.println("--- Punto 8: Resumen Agregado (COUNT, SUM, AVG) ---");
+            Object[] resumen = ConsultasNivel1y2.resumenAgregadoFacturasEmitidas(em, "EMITIDA");
+            Long cantidad = (Long) resumen[0];
+            Double suma = (Double) resumen[1];
+            Double promedio = (Double) resumen[2];
+            
+            System.out.println("Cantidad Facturas: " + cantidad + 
+                               " | Suma Total: $" + suma + 
+                               " | Importe Promedio: $" + promedio);
+
+            System.out.println("--- Punto 9: Puntos de Venta por lista [1, 2, 5] ---");
+            List<PuntoVenta> puntosVenta = ConsultasNivel1y2.puntosVentaPorNumeros(em, Arrays.asList(1, 2, 5));
+            for (PuntoVenta pv : puntosVenta) {
+                System.out.println("N° PV: " + pv.getNumero() + 
+                                   " | Descripción: " + pv.getDescripcion());
             }
         } finally {
             em.close();

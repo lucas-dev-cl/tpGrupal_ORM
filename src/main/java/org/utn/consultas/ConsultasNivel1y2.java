@@ -3,6 +3,9 @@ package org.utn.consultas;
 import jakarta.persistence.EntityManager;
 import org.utn.entity.venta.FacturaVenta;
 import org.utn.entity.articulo.Articulo;
+import org.utn.entity.cliente.Cliente;
+import org.utn.entity.venta.PuntoVenta;
+import java.util.Arrays;
 
 import java.util.List;
 
@@ -61,6 +64,52 @@ public class ConsultasNivel1y2 {
         return em.createQuery(jpql, FacturaVenta.class)
                  .setParameter("estado", "EMITIDA")
                  .setParameter("montoMinimo", montoMinimo)
+                 .getResultList();
+    }
+    /**
+     * 6. Búsqueda por Patrón de Texto (LIKE y LOWER).
+     * Busca clientes por denominación parcial (case-insensitive) o cuyo CUIT empiece por un prefijo.
+     */
+    public static List<Cliente> buscarClientesPorNombreOCuit(EntityManager em, String textoNombre, String prefijoCuit) {
+        String jpql = "SELECT c FROM Cliente c " +
+                      "WHERE LOWER(c.denominacion) LIKE LOWER(:denominacion) " +
+                      "   OR c.cuitCuil LIKE :cuitPrefix";
+        
+        return em.createQuery(jpql, Cliente.class)
+                 .setParameter("denominacion", "%" + textoNombre + "%")
+                 .setParameter("cuitPrefix", prefijoCuit + "%")
+                 .getResultList();
+    }
+    /**
+     * 7. Valores Distintos y Ordenamiento (DISTINCT y ORDER BY).
+     * Obtiene los estados únicos registrados en las facturas, ordenados alfabéticamente.
+     */
+    public static List<String> estadosUnicosFacturas(EntityManager em) {
+        String jpql = "SELECT DISTINCT f.estado FROM FacturaVenta f ORDER BY f.estado ASC";
+        return em.createQuery(jpql, String.class).getResultList();
+    }
+
+    /**
+     * 8. Funciones de Agregación Simples (COUNT, SUM, AVG).
+     * Devuelve cantidad, suma y promedio de importes totales en un único arreglo Object[].
+     */
+    public static Object[] resumenAgregadoFacturasEmitidas(EntityManager em, String estado) {
+        String jpql = "SELECT COUNT(f), SUM(f.importeTotal), AVG(f.importeTotal) " +
+                      "FROM FacturaVenta f WHERE f.estado = :estado";
+        
+        return em.createQuery(jpql, Object[].class)
+                 .setParameter("estado", estado)
+                 .getSingleResult();
+    }
+
+    /**
+     * 9. Operador de Inclusión (IN).
+     * Obtiene los puntos de venta cuyo número coincida con la lista recibida por parámetro.
+     */
+    public static List<PuntoVenta> puntosVentaPorNumeros(EntityManager em, List<Integer> numeros) {
+        String jpql = "SELECT pv FROM PuntoVenta pv WHERE pv.numero IN :numeros";
+        return em.createQuery(jpql, PuntoVenta.class)
+                 .setParameter("numeros", numeros)
                  .getResultList();
     }
 }
