@@ -29,16 +29,7 @@ public class Cliente extends AuditoriaApp {
     @JoinColumn(name = "domicilio_id", nullable = false)
     private Domicilio domicilio;
 
-    // Dato obligatorio para emitir comprobantes validos ante AFIP.
-    // Sin cascada: muchos clientes comparten la misma CondicionIva,
-    // no le pertenece a un cliente en particular.
     @ManyToOne
     @JoinColumn(name = "condicion_iva_id", nullable = false)
     private CondicionIva condicionIva;
-
-    // Moneda en la que opera habitualmente el cliente. Sin cascada
-    // por el mismo motivo que CondicionIva (catalogo compartido).
-    @ManyToOne
-    @JoinColumn(name = "tipo_moneda_id")
-    private TipoMoneda tipoMoneda;
 }

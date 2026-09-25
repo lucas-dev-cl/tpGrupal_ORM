@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.utn.entity.base.AuditoriaApp;
+import org.utn.entity.cliente.Cliente;
 
 import java.util.Date;
 import java.util.List;
@@ -45,8 +46,8 @@ public class FacturaVenta extends AuditoriaApp {
     private PuntoVenta puntoVenta;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private org.utn.entity.cliente.Cliente cliente;
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
 
     private double importeCobrado;
     private double importeSaldo;
